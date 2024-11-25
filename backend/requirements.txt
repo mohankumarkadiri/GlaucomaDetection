@@ -1,0 +1,12 @@
+keras
+flask==2.2.5
+Pillow
+numpy
+tensorflow
+setuptools
+Flask-Cors
+python-dotenv
+authlib
+pymongo
+flask-session
+flask-mongoengine

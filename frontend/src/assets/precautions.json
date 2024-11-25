@@ -1,0 +1,67 @@
+[
+    {
+        "title": "Regular Eye Exams",
+        "description": "Glaucoma often has no symptoms in its early stages, so regular eye exams are crucial to monitor any changes in eye pressure and the condition of the optic nerve.",
+        "recommendation": "Schedule comprehensive eye exams at least once a year or as advised by the ophthalmologist."
+    },
+    {
+        "title": "Medications & Treatment",
+        "description": "Glaucoma is typically managed with medication that lowers eye pressure, such as eye drops.",
+        "recommendation": "Always use prescribed eye drops as directed by the doctor. Do not skip doses or discontinue medication without consulting the doctor."
+    },
+    {
+        "title": "Monitor Eye Pressure",
+        "description": "Eye pressure control is essential in managing glaucoma and preventing vision loss.",
+        "recommendation": "If prescribed, use devices or visit eye clinics regularly to check your eye pressure and ensure it stays within a safe range."
+    },
+    {
+        "title": "Protect Eyes from Injury",
+        "description": "Any trauma to the eye can exacerbate glaucoma or damage vision further.",
+        "recommendation": "Wear protective eyewear when participating in sports, using tools, or in situations where the eyes may be at risk of injury."
+    },
+    {
+        "title": "Healthy Lifestyle",
+        "description": "A balanced diet, regular exercise, and maintaining a healthy weight can help reduce eye pressure and improve overall eye health.",
+        "recommendation": "Maintain a healthy diet rich in antioxidants, omega-3 fatty acids, and vitamins like A, C, and E. Engage in regular physical activity like walking or swimming."
+    },
+    {
+        "title": "Limit Caffeine Intake",
+        "description": "Excessive caffeine consumption may increase intraocular pressure (IOP) in some individuals, which can worsen glaucoma.",
+        "recommendation": "Limit caffeinated beverages to moderate levels and avoid consuming excessive amounts of coffee or energy drinks."
+    },
+    {
+        "title": "Avoid Smoking",
+        "description": "Smoking can worsen blood circulation to the optic nerve and may increase the risk of developing glaucoma.",
+        "recommendation": "If you smoke, consider quitting, and avoid exposure to secondhand smoke."
+    },
+    {
+        "title": "Be Mindful of Eye Strain",
+        "description": "Prolonged screen time or reading in poor lighting can strain the eyes and exacerbate symptoms of glaucoma.",
+        "recommendation": "Take breaks every 20 minutes while using screens (following the 20-20-20 rule), and ensure proper lighting when reading or working."
+    },
+    {
+        "title": "Stay Hydrated",
+        "description": "Dehydration can increase eye pressure and impact eye health.",
+        "recommendation": "Drink plenty of water throughout the day to maintain hydration, but avoid excessive fluid intake in one go."
+    },
+    {
+        "title": "Monitor Blood Pressure",
+        "description": "High blood pressure and poor circulation can affect eye health and may exacerbate glaucoma.",
+        "recommendation": "Regularly monitor your blood pressure and work with your healthcare provider to maintain a healthy range."
+    },
+    {
+        "title": "Rest and Sleep",
+        "description": "Adequate sleep helps to reduce overall stress and eye strain.",
+        "recommendation": "Aim for 7-8 hours of quality sleep each night, and avoid staying in one position for too long."
+    },
+    {
+        "title": "Seek Immediate Medical Help if Symptoms Worsen",
+        "description": "If there are sudden changes in vision or increased eye pain, this could indicate a serious issue.",
+        "recommendation": "Seek emergency medical attention if you experience blurry vision, sudden loss of vision, nausea, or severe headaches."
+    },
+    {
+        "title": "Educational Resources",
+        "description": "Understanding the condition can empower patients to manage it better.",
+        "recommendation": "Direct users to trusted educational resources or support groups where they can learn more about glaucoma management, and connect with others facing similar challenges."
+    }
+]

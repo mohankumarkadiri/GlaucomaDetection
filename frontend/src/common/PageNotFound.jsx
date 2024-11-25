@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import { Link } from 'react-router-dom';
-import LottieFile from '../assets/images/Lottie/page_not_found.json';
+import LottieFile from '../assets/images/lottie/page_not_found.json';
 import { useSnackbar } from '../hooks/SnackBarProvider';
-import { Button } from '@mui/material';
+import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
 
@@ -19,8 +19,7 @@ const PageNotFound = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
-            height: '100%',
+            height: '100vh',
         }}>
             <Lottie
                 animationData={LottieFile}
@@ -34,7 +33,7 @@ const PageNotFound = () => {
             <Stack gap={5} alignItems={"center"}>
                 <Typography level="h3" color='danger'>Page Not Found</Typography>
                 <Link to={"/"}>
-                    <Button>"Home Page ➺</Button>
+                    <Button variant='soft'>Home Page ➺</Button>
                 </Link>
             </Stack>
         </div>

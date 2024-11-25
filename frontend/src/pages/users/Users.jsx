@@ -188,8 +188,8 @@ const Users = () => {
                 ))}
             </div>)}
             {loading && <div style={{ height: '60%' }}><Loading1 /></div>}
-            {!loading && errors && <div style={{ width: '100%', height: '600px' }}><Error errors={errors} /></div>}
-            {!loading && !errors && Array.isArray(filteredUsers) && !filteredUsers.length && <div style={{ width: '100%', height: '600px' }}><NoData /></div>}
+            {!loading && errors && <Error errors={errors} />}
+            {!loading && !errors && Array.isArray(filteredUsers) && !filteredUsers.length && <NoData />}
         </div>
     );
 };
