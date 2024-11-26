@@ -43,7 +43,7 @@ const UserForm = ({ handleUserFormSubmit, edit, editFormDetails }) => {
             openSnackbar('Role must be Chosen', 'danger')
         }
         else {
-            handleUserFormSubmit(formData, edit, editFormDetails?._id);
+            handleUserFormSubmit(formData, edit, editFormDetails?.id);
         }
     }
 

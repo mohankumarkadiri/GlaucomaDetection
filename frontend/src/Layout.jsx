@@ -20,7 +20,8 @@ const Layout = () => {
     let [loading, setLoading] = useState(true);
     let [errors, setErrors] = useState('');
     const [sideBarOpen, setSideBarOpen] = useState(false);
-    let isLoggedIn = useSelector(state => state?.auth?.loggedIn);
+    let loggedUser = useSelector(state => state?.auth);
+    let isLoggedIn = loggedUser?.loggedIn;
 
     useLayoutEffect(() => {
         document.title = 'Vision Space';
@@ -33,9 +34,16 @@ const Layout = () => {
             setLoading(true);
             try {
                 let response = await axios.get(`${config.SERVER_BASE_ADDRESS}/api`, { withCredentials: true });
+                const hasAddress = Boolean(response?.data?.district && response?.data?.state);
+                
                 dispatch(login(response?.data));
                 setLoading(false);
                 setErrors('');
+
+                if (!hasAddress) {
+                    navigate('/addressForm');
+                }
+
             } catch (err) {
                 console.log(err);
                 TRIES_LEFT--;

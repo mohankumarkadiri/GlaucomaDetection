@@ -9,6 +9,7 @@ import CameraEnhanceIcon from '@mui/icons-material/CameraEnhance';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import CustomTooltip from '../common/CustomTooltip';
 import assets from '../assets';
 import { logout } from '../store/authSlice';
@@ -41,6 +42,12 @@ const SideBar = ({ onToggle }) => {
             tooltip: 'Find eye specialists near you',
             icon: VisibilityIcon,
             link: 'eyeSpecialists',
+        },
+        {
+            name: 'Predictions',
+            tooltip: 'Predictions Dashboard',
+            icon: AssessmentIcon,
+            link: 'predictionsDashboard',
         },
         {
             name: 'Health Tips',

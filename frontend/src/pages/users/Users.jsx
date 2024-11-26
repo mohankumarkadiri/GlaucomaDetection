@@ -48,11 +48,11 @@ const Users = () => {
         try {
             if (isEdited) {
                 openSnackbar('Updating User details...');
-                await axios.put(`${config.SERVER_BASE_ADDRESS}/user/${id}`, formData, { withCredentials: true })
+                await axios.put(`${config.SERVER_BASE_ADDRESS}/api/user/${id}`, formData, { withCredentials: true })
                 openSnackbar('User has been modified', 'success');
             } else {
                 openSnackbar('Creating new User...');
-                await axios.post(`${config.SERVER_BASE_ADDRESS}/user`, formData, { withCredentials: true });
+                await axios.post(`${config.SERVER_BASE_ADDRESS}/api/user`, formData, { withCredentials: true });
                 openSnackbar('User has been created', 'success');
             }
             dispatch(fetchUsers());
@@ -72,7 +72,7 @@ const Users = () => {
 
     const getUserById = (id) => {
         if (users && Array.isArray(users)) {
-            let output = users.filter(user => user._id === id);
+            let output = users.filter(user => user.id === id);
             if (output && Array.isArray(output)) return output[0]
         }
         return {}
@@ -104,7 +104,7 @@ const Users = () => {
             dispatch(resetDeleteUserId());
             try {
                 openSnackbar('Deleting User details...');
-                await axios.delete(`${config.SERVER_BASE_ADDRESS}/user/${id}`, { withCredentials: true })
+                await axios.delete(`${config.SERVER_BASE_ADDRESS}/api/user/${id}`, { withCredentials: true })
                 openSnackbar('User has been deleted', 'success');
                 dispatch(fetchUsers());
             } catch (err) {
@@ -177,9 +177,9 @@ const Users = () => {
             }}>
                 {filteredUsers.map((user) => (
                     <UserCard
-                        key={user._id}
-                        id={user._id}
-                        ProfileImage={user.profileImage}
+                        key={user.id}
+                        id={user.id}
+                        ProfileImage={user.profile_image}
                         name={user.name}
                         role={user?.role || 'user'}
                         phone={user.phone}

@@ -10,3 +10,4 @@ authlib
 pymongo
 flask-session
 flask-mongoengine
+cloudinary

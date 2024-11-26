@@ -18,6 +18,8 @@ import EyeSpecialists from './pages/EyeSpecialists';
 import HealthTips from './pages/HealthTips';
 import MeditationGuide from './pages/MeditationGuide';
 import DietPlans from './pages/DietPlans';
+import PredictionDashboard from './pages/PredictionsDashboard';
+import AddressForm from './pages/AddressForm';
 import store from './store';
 import './App.css';
 
@@ -30,10 +32,12 @@ const router = createBrowserRouter(
 				<Route path='healthTips' element={<HealthTips />}></Route>
 				<Route path='meditationGuide' element={<MeditationGuide />}></Route>
 				<Route path='dietPlans' element={<DietPlans />}></Route>
+				<Route path='predictionsDashboard' element={<PredictionDashboard />}></Route>
 				<Route path='users' element={<Users />}></Route>
 				<Route path='UserRequests' element={<UserRequests />}></Route>
 				<Route path='*' element={<PageNotFound />}></Route>
 			</Route>
+			<Route path='addressForm' element={<AddressForm />}></Route>
 			<Route path='login' element={<Login />}></Route>
 		</Route>
 	)

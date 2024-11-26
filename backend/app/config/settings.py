@@ -11,9 +11,16 @@ class Config:
     MODEL_PATH = os.getenv('MODEL_PATH')
     UPLOAD_FOLDER = "app/static/uploads"
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+    UI_BASE_URL = os.getenv('UI_BASE_URL')
+    
+    #Google oAuth Configuration
     GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
     GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-    UI_BASE_URL = os.getenv('UI_BASE_URL')
+    
+    # CLOUDINARY Configuration
+    CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
+    CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
+    CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
 
     # Flask-Session MongoDB configuration
     SESSION_TYPE = 'mongodb'

@@ -1,8 +1,11 @@
 from flask import Blueprint, request, jsonify, session, redirect
 from app.controllers.predict_image import predict_image
 from app.models.user import User
+from app.models.prediction import Prediction
 from app.models.user_requests import UserRequest
 from app.middleware.auth import login_required, admin_required
+import cloudinary.uploader
+from io import BytesIO
 
 api_bp = Blueprint("api", __name__)
 
@@ -12,9 +15,10 @@ api_bp = Blueprint("api", __name__)
 @login_required
 def get_user():
     try:
-        user = session.get("user")
-        if not user:
+        user_id = session.get("user").get("id")
+        if not user_id:
             return jsonify({"message": "Session User Not Exists"}), 404
+        user = User.objects(id=user_id).first()
         return jsonify(user), 200
     except Exception as e:
         return jsonify({"message": e}), 500
@@ -25,6 +29,7 @@ def get_user():
 @login_required
 def predict():
     try:
+        # Check if an image is provided
         if "image" not in request.files:
             return jsonify({"message": "No image provided"}), 400
 
@@ -33,14 +38,78 @@ def predict():
 
         # Get the prediction and confidence
         predicted_class, confidence, error = predict_image(img_bytes)
-
+        confidence = round(confidence * 100, 2)
         if error:
             return jsonify({"message": str(error)}), 500
-        
-        result = {"label": predicted_class, "confidence": round(confidence * 100, 2)}
-        print(result)
 
-        return jsonify(result)
+        # Upload image to Cloudinary after successful prediction
+        try:
+            img_stream = BytesIO(img_bytes)
+
+            upload_result = cloudinary.uploader.upload(
+                img_stream, folder="glaucoma_predictions", resource_type="image"
+            )
+            print(upload_result)
+            image_url = upload_result.get("secure_url")
+            if not image_url:
+                return (
+                    jsonify(
+                        {
+                            "message": f"Cloudinary upload failed",
+                            "label": predicted_class,
+                            "confidence": confidence,
+                        }
+                    ),
+                    200,
+                )
+        except Exception as cloudinary_error:
+            print(cloudinary_error)
+            return (
+                jsonify(
+                    {
+                        "message": f"Cloudinary upload failed: {str(cloudinary_error)}",
+                        "label": predicted_class,
+                        "confidence": confidence,
+                    }
+                ),
+                200,
+            )
+
+        # Save prediction to database
+        user_email = session.get("user", {}).get("email")
+        prediction = Prediction(
+            image_url=image_url,
+            label=predicted_class,
+            confidence=confidence,
+            user_email=user_email,
+        )
+        prediction.save()
+
+        result = {"label": predicted_class, "confidence": confidence}
+        return jsonify(result), 200
+
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+
+
+@api_bp.route("/predictions", methods=["GET"])
+@login_required
+def get_predictions():
+    try:
+        user = session.get("user", {})
+        user_role = user.get("role")
+        user_email = user.get("email")
+
+        if not user_email:
+            return jsonify({"message": "User not found in session"}), 404
+
+        if user_role == "admin":
+            predictions = Prediction.objects()
+        else:
+            predictions = Prediction.objects(user_email=user_email)
+
+        return jsonify([prediction.to_json() for prediction in predictions]), 200
+
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
@@ -147,13 +216,18 @@ def get_users():
 def create_user():
     try:
         data = request.json
+        email = data.get("email")
 
-        if not data.get("email"):
+        if not email:
             return jsonify({"error": "Email is required"}), 400
 
-        user = User(**data).save()
+        is_user_exists = User.objects(email=email).first()
+        if is_user_exists:
+            return jsonify({"message": "Email Already Exists"}), 400
 
+        user = User(**data).save()
         return jsonify(user.to_json()), 201
+
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
@@ -164,6 +238,7 @@ def create_user():
 def update_user(user_id):
     try:
         user = User.objects(id=user_id).first()
+        print(user)
         if not user:
             return jsonify({"error": "User not found"}), 404
 
@@ -174,6 +249,37 @@ def update_user(user_id):
         return jsonify(user.to_json()), 200
     except Exception as e:
         return jsonify({"message": e}), 500
+
+
+@api_bp.route("/user/address", methods=["PUT"])
+@login_required
+def update_address():
+    try:
+
+        user_id = session.get("user", {}).get("id")
+        if not user_id:
+            return jsonify({"message": "User not found in session"}), 404
+
+        user = User.objects(id=user_id).first()
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+        data = request.json
+        if not data:
+            return jsonify({"message": "No data provided"}), 400
+
+        district = data.get("district")
+        state = data.get("state")
+
+        if not district or not state:
+            return jsonify({"message": "Both 'district' and 'state' are required"}), 400
+
+        user.modify(set__district=district, set__state=state)
+
+        return jsonify(user.to_json()), 200
+
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
 
 
 # Delete a user

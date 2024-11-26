@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const Header = () => {
     const loggedUser = useSelector(state => state.auth);
     const userName = loggedUser?.userInfo?.name || 'User';
-    const profileImage = loggedUser?.profile || '';
+    const profileImage = loggedUser?.userInfo?.profile_image || '';
     const currentPage = loggedUser?.currentPage;
 
     return (

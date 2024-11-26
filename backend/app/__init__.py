@@ -6,6 +6,7 @@ from flask_session import Session
 from app.models.user import db
 from werkzeug.middleware.proxy_fix import ProxyFix
 import os
+import cloudinary
 
 oauth = OAuth()
 
@@ -26,7 +27,7 @@ def create_app():
     # Initialize MongoDB connection with error handling
     try:
         db.init_app(app)
-        print('✅ Connected to MongoDB')
+        print("✅ Connected to MongoDB")
     except Exception as e:
         print(f"⛔ Failed to initialize MongoDB: {str(e)}")
         raise
@@ -34,7 +35,7 @@ def create_app():
     # Initialize Session with MongoDB
     try:
         Session(app)
-        print('✅ Sessions Initialized')
+        print("✅ Sessions Initialized")
     except Exception as e:
         print(f"⛔ Failed to initialize Session: {str(e)}")
         raise
@@ -59,6 +60,17 @@ def create_app():
     except Exception as e:
         print(f"⛔ Failed to configure Google OAuth: {str(e)}")
         raise
+
+    # Configure Cloudinary
+    try:
+        cloudinary.config(
+            cloud_name=app.config["CLOUDINARY_CLOUD_NAME"],
+            api_key=app.config["CLOUDINARY_API_KEY"],
+            api_secret=app.config["CLOUDINARY_API_SECRET"],
+        )
+        print("✅ Cloudinary configured successfully.")
+    except Exception as e:
+        raise RuntimeError(f"❌ Cloudinary configuration failed: {str(e)}")
 
     # Configure CORS
     CORS(

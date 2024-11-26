@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../store/authSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -20,6 +20,7 @@ import {
     Fade,
     useTheme
 } from '@mui/material';
+import { useSnackbar } from '../hooks/SnackBarProvider';
 import {
     UploadFile as UploadIcon,
     Warning as WarningIcon,
@@ -32,13 +33,8 @@ import RenderSpecialists from '../components/RenderSpecialists';
 
 import EYE_SPECIALISTS from '../assets/doctors.json';
 
-const USER_LOCATION = {
-    district: 'Coorg',
-    state: 'Karnataka'
-};
-
 const GlaucomaDetector = () => {
-    
+
     const [detectionResult, setDetectionResult] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [specialistDialogOpen, setSpecialistDialogOpen] = useState(false);
@@ -47,7 +43,16 @@ const GlaucomaDetector = () => {
     const fileInputRef = useRef(null);
     const theme = useTheme();
 
+    let userInfo = useSelector(state => state?.auth?.userInfo);
+
+    const USER_LOCATION = {
+        district: userInfo?.district,
+        state: userInfo?.state,
+    };
+
+
     const dispatch = useDispatch();
+    const openSnackBar = useSnackbar();
 
     useLayoutEffect(() => {
         dispatch(setCurrentPage('Glaucoma Detector'))
@@ -68,12 +73,15 @@ const GlaucomaDetector = () => {
                 withCredentials: true,
             });
 
-            const { label, confidence } = response.data;
+            const { label, confidence, message } = response.data;
 
             setDetectionResult({
                 status: label,
                 confidence: parseFloat(confidence).toFixed(2)
             });
+            if (message) {
+                openSnackBar(message, 'danger');
+            }
         } catch (error) {
             console.error("Detection failed:", error);
             setError(`Failed to analyze image. Please try again. Reason: ${error?.response?.data?.message || error?.message}`);
@@ -251,7 +259,7 @@ const GlaucomaDetector = () => {
                                                         )}
                                                         <Typography variant="h5" color={detectionResult.status === 'Glaucoma' ? 'error.main' : 'success.main'}>
                                                             {detectionResult.status === 'Glaucoma' ? 'Glaucoma Detected' : 'Healthy Scan'}
-                                                            <GlaucomaPrecautions />
+                                                            {detectionResult.status === 'Glaucoma' && <GlaucomaPrecautions />}
                                                         </Typography>
                                                     </Box>
 

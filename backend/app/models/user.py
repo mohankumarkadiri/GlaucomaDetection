@@ -7,7 +7,9 @@ class User(db.Document):
     email = db.StringField(required=True, unique=True)
     name = db.StringField()
     role = db.StringField(default="user", choices=["user", "admin"])
-    profileImage = db.StringField()
+    profile_image = db.StringField()
+    district = db.StringField()
+    state = db.StringField()
 
     meta = {
         "collection": "Users",
@@ -20,4 +22,7 @@ class User(db.Document):
             "email": self.email,
             "name": self.name,
             "role": self.role,
+            "profile_image": self.profile_image,
+            "district": self.district,
+            "state": self.state,
         }

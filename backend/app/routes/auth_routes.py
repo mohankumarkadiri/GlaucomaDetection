@@ -42,9 +42,7 @@ def authorize():
         google = oauth.create_client("google")
         if not google:
             return (
-                jsonify(
-                    {"message": "Google OAuth client is not configured correctly"}
-                ),
+                jsonify({"message": "Google OAuth client is not configured correctly"}),
                 500,
             )
 
@@ -52,7 +50,7 @@ def authorize():
         resp = google.get("https://www.googleapis.com/oauth2/v3/userinfo")
         user_info = resp.json()
 
-        # Check if user exists and is allowed
+        # Check if user exists
         user = User.objects(email=user_info["email"]).first()
 
         if not user:
@@ -61,7 +59,7 @@ def authorize():
         # Update user login info
         user.modify(
             set__name=user_info.get("name"),
-            set__profileImage=user_info.get("picture"),
+            set__profile_image=user_info.get("picture"),
         )
 
         # Store user info in session

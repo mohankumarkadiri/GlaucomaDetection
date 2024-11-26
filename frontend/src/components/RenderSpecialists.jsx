@@ -86,10 +86,8 @@ export default function RenderSpecialists({ specialists }) {
                         </Stack>
                     </Grid>
 
-                    {/* Right Column - Details */}
                     <Grid item xs={12} md={8}>
                         <Stack spacing={2}>
-                            {/* Availability */}
                             <Box>
                                 <Typography variant="subtitle1" color="success" sx={{ mb: 1, fontWeight: 600 }}>
                                     Next Available
@@ -103,8 +101,6 @@ export default function RenderSpecialists({ specialists }) {
                             </Box>
 
                             <Divider />
-
-                            {/* Contact & Location */}
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <Stack spacing={1}>
@@ -136,7 +132,6 @@ export default function RenderSpecialists({ specialists }) {
 
                             <Divider />
 
-                            {/* Insurance */}
                             <Box>
                                 <Typography variant="subtitle1" color="success" sx={{ mb: 1, fontWeight: 600 }}>
                                     Accepted Insurance
