@@ -25,7 +25,7 @@ const AddressForm = () => {
         setError('');
 
         try {
-            await axios.put(`${config.SERVER_BASE_ADDRESS}/api/user/address`, {
+            await axios.put(`${config.SERVER_BASE_ADDRESS}/api/user/profile`, {
                 district,
                 state
             }, {withCredentials: true});

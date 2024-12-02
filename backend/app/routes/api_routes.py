@@ -273,7 +273,7 @@ def update_profile():
         name = data.get("name")
         
         if not name:
-            name = user.get("name")
+            name = user.to_json().get('name')
 
         if not district or not state:
             return jsonify({"message": "Both 'district' and 'state' are required"}), 400
@@ -283,6 +283,7 @@ def update_profile():
         return jsonify(user.to_json()), 200
 
     except Exception as e:
+        print(e)
         return jsonify({"message": str(e)}), 500
 
 

@@ -26,7 +26,7 @@ import config from '../config';
 
 const ProfileEditPage = () => {
 
-    const { district, state, name, email } = useSelector(state => state?.auth?.userInfo) || {};
+    const { district, state, name, email, profile_image } = useSelector(state => state?.auth?.userInfo) || {};
 
     const [profile, setProfile] = useState({ district, state, name });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,7 +137,7 @@ const ProfileEditPage = () => {
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                                 <Avatar
-                                    src={profile.profile_image}
+                                    src={profile_image}
                                     slotProps={{ img: { referrerPolicy: 'no-referrer' } }}
                                     sx={{
                                         width: 80,
