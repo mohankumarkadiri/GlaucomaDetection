@@ -34,6 +34,7 @@ const Layout = () => {
             setLoading(true);
             try {
                 let response = await axios.get(`${config.SERVER_BASE_ADDRESS}/api`, { withCredentials: true });
+                openSnackbar(`Welcome ${response?.data?.name}!`);
                 const hasAddress = Boolean(response?.data?.district && response?.data?.state);
                 
                 dispatch(login(response?.data));

@@ -127,7 +127,7 @@ def create_user_request():
 
         existing_user = User.objects(email=email).first()
         if existing_user:
-            return jsonify({"error": "User Already Exists"}), 409
+            return jsonify({"message": "User Already Exists"}), 409
 
         pending_request = UserRequest.objects(email=email, status="pending").first()
         if pending_request:
@@ -159,6 +159,7 @@ def get_requests():
 
 # Approve the User Request
 @api_bp.route("user/approve/<request_id>", methods=["GET"])
+@admin_required
 def approve_request(request_id):
     try:
         request = UserRequest.objects(id=request_id).modify(
@@ -238,9 +239,8 @@ def create_user():
 def update_user(user_id):
     try:
         user = User.objects(id=user_id).first()
-        print(user)
         if not user:
-            return jsonify({"error": "User not found"}), 404
+            return jsonify({"message": "User not found"}), 404
 
         data = request.json
 
@@ -251,9 +251,9 @@ def update_user(user_id):
         return jsonify({"message": e}), 500
 
 
-@api_bp.route("/user/address", methods=["PUT"])
+@api_bp.route("/user/profile", methods=["PUT"])
 @login_required
-def update_address():
+def update_profile():
     try:
 
         user_id = session.get("user", {}).get("id")
@@ -270,11 +270,15 @@ def update_address():
 
         district = data.get("district")
         state = data.get("state")
+        name = data.get("name")
+        
+        if not name:
+            name = user.get("name")
 
         if not district or not state:
             return jsonify({"message": "Both 'district' and 'state' are required"}), 400
 
-        user.modify(set__district=district, set__state=state)
+        user.modify(set__district=district, set__state=state, set__name=name)
 
         return jsonify(user.to_json()), 200
 
@@ -289,7 +293,7 @@ def delete_user(user_id):
     try:
         user = User.objects(id=user_id).first()
         if not user:
-            return jsonify({"error": "User not found"}), 404
+            return jsonify({"message": "User not found"}), 404
         user.delete()
         return jsonify({"message": "User deleted successfully"}), 200
     except Exception as e:

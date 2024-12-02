@@ -14,7 +14,7 @@ oauth = OAuth()
 def create_app():
     app = Flask(__name__)
 
-    env = os.getenv("FLASK_ENV", "development")
+    env = os.getenv("FLASK_DEBUG", "development")
     if env == "production":
         app.config.from_object(ProductionConfig)
     else:

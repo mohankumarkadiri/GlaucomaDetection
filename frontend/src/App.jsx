@@ -16,9 +16,9 @@ import Users from './pages/users/Users';
 import GlaucomaDetector from './pages/GlaucomaDetector';
 import EyeSpecialists from './pages/EyeSpecialists';
 import HealthTips from './pages/HealthTips';
-import MeditationGuide from './pages/MeditationGuide';
 import DietPlans from './pages/DietPlans';
 import PredictionDashboard from './pages/PredictionsDashboard';
+import ProfileEditPage from './pages/ProfileEditPage';
 import AddressForm from './pages/AddressForm';
 import store from './store';
 import './App.css';
@@ -30,9 +30,9 @@ const router = createBrowserRouter(
 				<Route path='glaucomaDetector' element={<GlaucomaDetector />}></Route>
 				<Route path='eyeSpecialists' element={<EyeSpecialists />}></Route>
 				<Route path='healthTips' element={<HealthTips />}></Route>
-				<Route path='meditationGuide' element={<MeditationGuide />}></Route>
 				<Route path='dietPlans' element={<DietPlans />}></Route>
 				<Route path='predictionsDashboard' element={<PredictionDashboard />}></Route>
+				<Route path='editProfile' element={<ProfileEditPage />}></Route>
 				<Route path='users' element={<Users />}></Route>
 				<Route path='UserRequests' element={<UserRequests />}></Route>
 				<Route path='*' element={<PageNotFound />}></Route>

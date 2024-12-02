@@ -8,7 +8,6 @@ class UserRequest(db.Document):
     status = db.StringField(
         default="pending", choices=["pending", "approved", "rejected"]
     )
-    profileImage = db.StringField()
 
     meta = {
         "collection": "User_Requests",

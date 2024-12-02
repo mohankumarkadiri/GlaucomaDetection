@@ -20,10 +20,16 @@ const authSlice = createSlice({
         },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload;
+        },
+        updateProfile: (state, action) => {
+            state.userInfo = {
+                ...state.userInfo,
+                ...action.payload,
+            }
         }
     }
 })
 
 
 export default authSlice.reducer;
-export const { login, logout, setCurrentPage } = authSlice.actions;
+export const { login, logout, setCurrentPage, updateProfile } = authSlice.actions;

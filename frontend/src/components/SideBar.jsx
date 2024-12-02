@@ -10,6 +10,7 @@ import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import DriveFileRenameOutlineSharpIcon from '@mui/icons-material/DriveFileRenameOutlineSharp';
 import CustomTooltip from '../common/CustomTooltip';
 import assets from '../assets';
 import { logout } from '../store/authSlice';
@@ -145,6 +146,14 @@ const SideBar = ({ onToggle }) => {
                             </li>
                         </CustomTooltip>
                     }
+                    <CustomTooltip title={!sideBarOpen && "Edit Profile"}>
+                        <li className='nav-link'>
+                            <Link to='editProfile'>
+                                <DriveFileRenameOutlineSharpIcon className='mui--icon' />
+                                <span className="text nav-text">Edit Profile</span>
+                            </Link>
+                        </li>
+                    </CustomTooltip>
                     <CustomTooltip title={!sideBarOpen && "Logout"}>
                         <li className='logout-btn' onClick={() => setOpen(true)} style={{ cursor: 'pointer' }}>
                             <LogoutOutlinedIcon className='mui--icon' />

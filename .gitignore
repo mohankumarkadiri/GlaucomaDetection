@@ -1,0 +1,4 @@
+backend/app/__pycache__/__init__.cpython-312.pyc
+backend/app/models/__pycache__/prediction.cpython-312.pyc
+backend/app/models/__pycache__/user_requests.cpython-312.pyc
+backend/app/routes/__pycache__/api_routes.cpython-312.pyc
