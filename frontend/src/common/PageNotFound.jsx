@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import { Link } from 'react-router-dom';
-import LottieFile from '../assets/images/lottie/page_not_found.json';
+import LottieFile from '../assets/images/Lottie/page_not_found.json';
 import { useSnackbar } from '../hooks/SnackBarProvider';
 import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
