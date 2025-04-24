@@ -1,5 +1,4 @@
-from flask import jsonify
-from keras.models import load_model
+from keras.models import load_model # type: ignore
 from app.utils.preprocess import preprocess_image
 import numpy as np
 
@@ -24,6 +23,6 @@ def predict_image(img_bytes):
         class_names = ["Glaucoma", "Normal"]
         predicted_class = class_names[class_idx]
 
-        return predicted_class, confidence, None
+        return predicted_class, float(confidence), None
     except Exception as e:
         return None, None, e
