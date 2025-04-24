@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'lottie-react';
-import LottieFile from '../assets/images/lottie/error.json';
+import LottieFile from '../assets/images/Lottie/error.json';
 import Typography from '@mui/joy/Typography';
 
 const Error = ({ errors }) => {
