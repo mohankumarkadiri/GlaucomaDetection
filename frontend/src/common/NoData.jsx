@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'lottie-react';
-import LottieFile from '../assets/images/lottie/no_data.json';
+import LottieFile from '../assets/images/Lottie/no_data.json';
 import { Typography } from '@mui/joy';
 
 const NoData = () => {
