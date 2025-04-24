@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'lottie-react';
-import LottieFile from '../assets/images/lottie/server_error.json';
+import LottieFile from '../assets/images/Lottie/server_error.json';
 import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 import ReplayIcon from '@mui/icons-material/Replay';
