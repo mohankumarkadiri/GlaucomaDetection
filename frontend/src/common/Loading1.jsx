@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'lottie-react';
-import LottieFile from '../assets/images/lottie/loading_1.json';
+import LottieFile from '../assets/images/Lottie/loading_1.json';
 
 const Loading1 = () => {
     return (
